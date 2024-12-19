@@ -8,8 +8,12 @@ class Game{
         int computer;
     public:
         int player;
+        int difficulty;
         Game(){
             
+        } 
+        Game(int d){
+            difficulty = d;
         } 
         int computerGuess(){
             srand(time(0));
@@ -20,15 +24,32 @@ class Game{
             }
             return randomNum;
         }
-        bool playerGuess(){
-            bool limit = true;
-            while (limit == true){
+        bool playerGuess(int limit){
+            bool accept = true;
+            limit = NULL;
+            cout <<"Enter how many guesses you need: " << endl;
+            cin >> limit;
+            while (accept == true /*&& limit != 0*/){
                 cout<<"Enter Your Guess: "<< endl;
                 cin >> player;
+                limit--;
                 if (player >10 || player <1){
                     cout<<"Invalid Guess."<< endl;
                     continue;
-                } else {
+                } else if(limit == 0){
+                    cout<<"You are over the limit."<< endl;
+                    return false;
+                } 
+                /*if (player == c || limit !=0){
+                    cout<<"You got it right, the answer was: "<<c<<endl;
+                } else if ()
+                */
+
+                /*else {
+                    cout<<"You got it wrong, the answer was: "<<c<<endl;
+                }*/
+                
+                else {
                     return true;
                 }
             }
@@ -41,6 +62,7 @@ class Game{
 };
 int main(){
     int score = 0;
+    int limit = NULL;
     Game g;
     bool game = true;
     int option;
@@ -56,23 +78,21 @@ int main(){
     cout<<"3. Exit"<<endl;
     cin >> option;
     int c = g.computerGuess();
-    int p = g.playerGuess();
     switch (option){
             case 1:
-                if(p > c && p != c){
-                    cout<<"You were too low, you lose."<<endl;
-                    cout<<"The answer was: "<<c<<endl;
-                } else if (p < c && p != c){
-                    cout<<"You were too high, you lose."<<endl;
-                    cout<<"The answer was: "<<c<<endl;
-                } else if (p == c){
+                if (g.playerGuess(limit) == c){
                     cout<<"You got it right, the answer was: "<<c<<endl;
                     score++;
+                } else {
+                    cout<<"You got it wrong, the answer was: "<<c<<endl;
                 }
                 break;
             case 2:
                 cout<<"The score is: "<<score<<" points"<<endl;
                 break;
+            case 3:
+                cout<<"You are exiting with a score of "<<score<<endl;
+                return false;
         }
     }
     return 0;
