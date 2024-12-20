@@ -86,7 +86,7 @@ class Game {
             cin >> player;
             limit --;
             int c = computerGuess();
-            if (player > c || player < 1) {
+            if (player > c || player < 1 && limit != 0){
                 cout << "Invalid Guess." << endl; // Notify invalid guess
                 continue; // Continue to the next iteration
                 limit++;
@@ -98,6 +98,9 @@ class Game {
     
         }
     return accept;
+    }
+    int Player(){
+        return player;
     }
 };
 
@@ -123,9 +126,8 @@ int main() {
 
         int c = g.computerGuess(); // Get the computer's guess
         switch (option) {
-            /*
             case 1: // If the player chooses to play
-                if (g.playerGuess(limit)) { // Check if the player made a valid guess
+                if (g.playerGuess()) { // Check if the player made a valid guess
                     if (g.Player() == c) { // Compare the player's guess with the computer's guess
                         cout << "You got it right, the answer was: " << c << endl; // Notify correct guess
                         score++; // Increment the score
@@ -140,7 +142,6 @@ int main() {
             case 3: // If the player chooses to exit
                 cout << "You are exiting with a score of " << score << endl; // Notify exit and score
                 return false; // Exit the program
-            */
         }
         
     }
