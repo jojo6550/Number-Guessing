@@ -91,9 +91,13 @@ class Game {
                 continue; // Continue to the next iteration
                 limit++;
                 cout <<"You have " << limit << " guesses." << endl;
+            } else if (limit == 0){
+                cout << "You are over the limit." << endl;
+                accept = false; // End the game loop
             }
     
         }
+    return accept;
     }
 };
 
